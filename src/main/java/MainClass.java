@@ -14,13 +14,13 @@ public class MainClass {
         WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS); //неявное ожидание элементов до их появления
         driver.manage().window().maximize(); //управление размером окна, максимальное
-        String link = "https://imgsrc.ru/cat/77-Rossiya.html";
+        String link = "https://imgsrc.ru/main/search.php?nopass=on&cat=77&page=1";
         driver.get(link);
         String mainTab = driver.getWindowHandle(); //запомнить имя открытой вкладки
         //JavascriptExecutor jse = (JavascriptExecutor)driver; // выполнять JavaScript с помощью переменной
         //driver.findElements(By.xpath("//table[@class='tdd']/tbody/tr"));
 
-        WebDriverWait wait = (new WebDriverWait(driver, 5)); //явное - ожидание элементов до их появления, которое используется 1 раз
+        WebDriverWait wait = (new WebDriverWait(driver, 5)); //явное ожидание элементов до их появления, которое используется 1 раз
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//table[@class='tdd']")));
 
         for (int i = 2; i < 102; i++) { //[2..102]
