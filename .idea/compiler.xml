@@ -6,8 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="downvotes" />
         <module name="Imgsrc_Downvote" />
+        <module name="downvotes" />
       </profile>
     </annotationProcessing>
   </component>
