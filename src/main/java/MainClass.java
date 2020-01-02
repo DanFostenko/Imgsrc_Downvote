@@ -13,40 +13,15 @@ public class MainClass {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\DanFo\\IdeaProjects\\Imgsrc_Downvote\\chromedriver.exe");
         System.setProperty("chrome.verbose", "true"); //headless  Chrome
         WebDriver driver = new ChromeDriver();
+        Login login = new Login(driver);
         /*driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS); //неявное ожидание элементов до их появления*/
         driver.manage().window().maximize(); //управление размером окна, максимальное
         String link = "https://imgsrc.ru/main/search.php?nopass=on&cat=77&page=1";
-        driver.get("https://imgsrc.ru/main/login.php?cnt=%2Fmembers%2F");
-        driver.findElement(By.xpath("//a[text()='Login to upload photos!']")).click();
-        driver.findElement(By.xpath("//td/input[@name='login']")).sendKeys("d346394");
-        driver.findElement(By.xpath("//input[@name='pass']")).sendKeys("7749f5a8");
-        driver.findElement(By.xpath("//td/input[@type='submit']")).click();
 
-        for (int i = 1; i < 1; i++) {
+        login.clickLogin();
+        login.signInWithCreds("d2218764","0cb86460");
+        login.createNewAlbum();
 
-            WebDriverWait wait = (new WebDriverWait(driver, 5)); //явное ожидание элементов до их появления, которое используется 1 раз
-            driver.manage().timeouts().pageLoadTimeout(1, TimeUnit.SECONDS);
-            WebElement button = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p/input[@type='text']")));
-            try {
-                driver.findElement(By.xpath("//p/input[@type='text']")).sendKeys(""+Calendar.getInstance().getTime());
-                driver.findElement(By.xpath("//input[@value='Create album']")).click();
-                driver.get("https://imgsrc.ru/members/");
-            } catch (TimeoutException ignore) {
-            }
-
-            /*driver.findElement(By.xpath("//input[@type='file']")).click();
-            Robot r = null;
-            try {
-                r = new Robot();
-            } catch (AWTException e) {
-                e.printStackTrace();
-            }
-            driver.switchTo().activeElement();
-            r.keyPress(KeyEvent.VK_A);  r.keyRelease(KeyEvent.VK_PERIOD);
-            r.keyPress(KeyEvent.VK_P);  r.keyPress(KeyEvent.VK_N);  r.keyPress(KeyEvent.VK_G);
-            driver.findElement(By.xpath("//input[@value='Upload photos to your album']")).click();*/
-
-        }
         driver.get(link);
         String mainTab = driver.getWindowHandle(); //запомнить имя открытой вкладки
         /*try {
