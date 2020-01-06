@@ -2,6 +2,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
+import java.util.concurrent.TimeUnit;
+
 public class Registration {
     WebDriver driver;
     String registrationPage = "https://imgsrc.ru/main/join.php";
@@ -17,11 +19,23 @@ public class Registration {
     //Elements on temporary email page
     private By emailReadField = By.xpath("//span[@id='email']");    //email on temporary email service page
     private By messageList = By.xpath("//td[text()='iMGSRC.RU registration']/..");
-    private By passwordReadField = By.xpath("/html/body/text()[3]");    //password on temporary email service page
+    private By passwordReadField = By.xpath("//body");    //password on temporary email service page
+
+    private String email;
+    private String login;
+    private String password;
 
     //Methods
     public void clickRegister() {
         driver.get(registrationPage);
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public void register() {
@@ -29,29 +43,42 @@ public class Registration {
         String mainTab = driver.getWindowHandle();  //remember the name of main browser tab
         ((JavascriptExecutor)driver).executeScript("window.open('https://www.minuteinbox.com','_blank');");    //driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL + "t")
         switchToActiveTab();
-        String email = this.getEmail();
+        email = this.getEmail();
+        //this.getLoginFromEmail();
         String[] parts = email.split("@");
-        String login = parts[0];
+        login = parts[0];
         System.out.println("Registration email: " + email);
         driver.switchTo().window(mainTab);
-        switchToActiveTab();
         //driver.close();
         this.typeEmail(email);
         this.typeLogin(login);
-        driver.findElement(submitButton);
-        driver.findElement(submitButton);
+        driver.findElement(submitButton).click();
+        driver.findElement(submitButton).click();;
         switchToActiveTab();
-        getPassword();
-        return;
+        password = getPasswordFromEmail();
+        //driver.close();
+        switchToActiveTab();
     }
 
     public String getEmail() {
         return driver.findElement(emailReadField).getText();
     }
 
-    public String getPassword() {
+    public String getLoginFromEmail() {
+        String[] parts = email.split("@");
+        login = parts[0];
+        System.out.println("Registration login: " + login);
+        return login;
+    }
+
+    public String getPasswordFromEmail() {
+        driver.manage().timeouts().implicitlyWait(12, TimeUnit.SECONDS); //waiting for element to appear
         driver.findElement(messageList).click();
-        String password = driver.switchTo().frame("iframeMail").findElement(passwordReadField).getText();  //get text password from email
+        driver.manage().timeouts().implicitlyWait(1,TimeUnit.SECONDS); //waiting for element to appear
+        String emailContent = driver.switchTo().frame("iframeMail").findElement(passwordReadField).getText();  //get text password from email
+        int index = emailContent.indexOf("password: ",0);
+        String password = emailContent.substring(index+10, index+18);
+        System.out.println("Registration password: " + password);
         driver.close();
         return password;
     }
@@ -69,6 +96,14 @@ public class Registration {
     private void switchToActiveTab() {
         for (String tab : driver.getWindowHandles()) {  //switch to the active tab
             driver.switchTo().window(tab);
+        }
+    }
+
+    public static void waitObjectLoad(int timeout) {
+        try {
+            Thread.sleep(timeout); //forced timeout to wait for the next object element to load
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }
