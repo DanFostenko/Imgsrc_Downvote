@@ -1,7 +1,6 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-
 import java.util.concurrent.TimeUnit;
 
 public class Registration {
@@ -44,19 +43,14 @@ public class Registration {
         ((JavascriptExecutor)driver).executeScript("window.open('https://www.minuteinbox.com','_blank');");    //driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL + "t")
         switchToActiveTab();
         email = this.getEmail();
-        //this.getLoginFromEmail();
-        String[] parts = email.split("@");
-        login = parts[0];
-        System.out.println("Registration email: " + email);
+        login = this.getLoginFromEmail();
         driver.switchTo().window(mainTab);
-        //driver.close();
         this.typeEmail(email);
         this.typeLogin(login);
         driver.findElement(submitButton).click();
         driver.findElement(submitButton).click();;
         switchToActiveTab();
         password = getPasswordFromEmail();
-        //driver.close();
         switchToActiveTab();
     }
 
