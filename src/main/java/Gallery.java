@@ -51,4 +51,18 @@ public class Gallery {
             }
         }
     }
+
+    private void switchToActiveTab() {
+        for (String tab : driver.getWindowHandles()) {  //switch to the active tab
+            driver.switchTo().window(tab);
+        }
+    }
+
+    public void checkAdds() {
+        if (driver.getWindowHandles().size() > 2) {
+            switchToActiveTab();
+            driver.close();
+            switchToActiveTab();
+        }
+    }
 }
