@@ -18,8 +18,8 @@ public class MainClass {
         /*registration.register();
         login.clickLogin();
         login.signInWithCreds(registration.getLogin(),registration.getPassword());*/
-        login.signInWithCreds("d2218764","0cb86460");
-        login.createNewAlbum();
+        /*login.signInWithCreds("d2218764","0cb86460");
+        login.createNewAlbum();*/
 
         driver.get(link);
         String mainTab = driver.getWindowHandle(); //запомнить имя открытой вкладки
