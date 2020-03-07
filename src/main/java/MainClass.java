@@ -4,7 +4,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class MainClass {
 
     public static void main(String[] args) {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\DanFo\\IdeaProjects\\Imgsrc_Downvote\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\b.fostenko\\IdeaProjects\\Imgsrc_Downvote\\chromedriver.exe");
         System.setProperty("chrome.verbose", "true"); //headless  Chrome
         WebDriver driver = new ChromeDriver();
         Login login = new Login(driver);
