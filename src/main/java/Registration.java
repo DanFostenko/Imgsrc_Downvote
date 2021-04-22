@@ -66,7 +66,7 @@ public class Registration {
     }
 
     public String getPasswordFromEmail() {
-        driver.manage().timeouts().implicitlyWait(12, TimeUnit.SECONDS); //waiting for element to appear
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS); //waiting for element to appear
         driver.findElement(messageList).click();
         driver.manage().timeouts().implicitlyWait(1,TimeUnit.SECONDS); //waiting for element to appear
         String emailContent = driver.switchTo().frame("iframeMail").findElement(passwordReadField).getText();  //get text password from email

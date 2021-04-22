@@ -22,6 +22,7 @@ public class Login {
     private By submitButton = By.xpath("//input[@type='submit']");   //'Login', 'Continue', 'I agree...' buttons
     private By newAlbumNameField = By.xpath("//input[@name='name']");
     private By createAlbumButton = By.xpath("//input[@value='Create album']");
+    private By saveAlbumButton = By.xpath("//input[@value='Save album information']");
     private By logoutButton = By.xpath("//td/input[@type='submit']");
 
     //Methods
@@ -48,14 +49,15 @@ public class Login {
     }
 
     public Login createNewAlbum() {
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 10; i++) {
             WebDriverWait wait = (new WebDriverWait(driver, 5)); //явное ожидание элементов до их появления, которое используется 1 раз
             driver.manage().timeouts().pageLoadTimeout(1, TimeUnit.SECONDS);
             WebElement button = wait.until(ExpectedConditions.presenceOfElementLocated(newAlbumNameField));
             try {
                 driver.findElement(newAlbumNameField).sendKeys(""+ Calendar.getInstance().getTime());
                 driver.findElement(createAlbumButton).click();
-                driver.get(loginPage);
+                //driver.findElement(saveAlbumButton).click();
+                driver.get("https://imgsrc.ru/members/");
             } catch (TimeoutException ignore) {
             }
             /*driver.findElement(By.xpath("//input[@type='file']")).click();

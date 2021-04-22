@@ -14,13 +14,18 @@ public class Gallery {
     }
 
     //Elements on page
-    private By continueToAlbumButton = By.xpath("//input[@value='Continue to album']");
-    private By downvoteButton = By.xpath("//a[text()='\uD83D\uDC4E']");
-    private By imageLink = By.xpath("//img[@class='big']");
+    private By languageButton = By.xpath("//i[text()='\uE894']");
+    private By continueToAlbumButton = By.xpath("//input[@type='submit']");
+    private By downvoteButton = By.xpath("//i[text()='\uE8DB']");
+    private By imageLink = By.xpath("//img[@id='bpi']");
     //private By submitButton = By.xpath("//input[@type='submit']");   //'Login', 'Continue', 'I agree...' buttons
 
 
     //Methods
+    public void switchLanguage() {
+        driver.findElement(languageButton).click();
+    }
+
     public void openGallery(String link) {
         driver.get(link);
         String mainTab = driver.getWindowHandle(); //запомнить имя открытой вкладки
