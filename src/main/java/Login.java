@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
@@ -17,9 +19,9 @@ public class Login {
     }
 
     //Elements on page
-    private By usernameField = By.xpath("//td/input[@name='login']");
+    private By usernameField = By.xpath("//td/form/input[@name='login']");
     private By passwordField = By.xpath("//input[@name='pass']");
-    private By submitButton = By.xpath("//input[@type='submit']");   //'Login', 'Continue', 'I agree...' buttons
+    private By submitButton = By.xpath("//td/form/input[@type='submit']");   //'Login', 'Continue', 'I agree...' buttons
     private By newAlbumNameField = By.xpath("//input[@name='name']");
     private By createAlbumButton = By.xpath("//input[@value='Create album']");
     private By saveAlbumButton = By.xpath("//input[@value='Save album information']");
@@ -50,7 +52,7 @@ public class Login {
 
     public Login createNewAlbum() {
         for (int i = 0; i < 10; i++) {
-            WebDriverWait wait = (new WebDriverWait(driver, 5)); //явное ожидание элементов до их появления, которое используется 1 раз
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofMinutes(5)); //явное ожидание элементов до их появления, которое используется 1 раз
             driver.manage().timeouts().pageLoadTimeout(1, TimeUnit.SECONDS);
             WebElement button = wait.until(ExpectedConditions.presenceOfElementLocated(newAlbumNameField));
             try {

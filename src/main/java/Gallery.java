@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class Gallery {
@@ -45,7 +47,7 @@ public class Gallery {
 
     public void downvote() {
         while (driver.findElements(downvoteButton).size() > 0) {
-            WebDriverWait wait = (new WebDriverWait(driver, 5)); //явное ожидание элементов до их появления, которое используется 1 раз
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofMinutes(5)); //явное ожидание элементов до их появления, которое используется 1 раз
             driver.manage().timeouts().pageLoadTimeout(1, TimeUnit.SECONDS);
             WebElement button = wait.until(ExpectedConditions.presenceOfElementLocated(downvoteButton));
             try {

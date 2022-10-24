@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 public class MainClass {
 
     public static void main(String[] args) {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\User\\IdeaProjects\\Imgsrc_Downvote\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Fostenko\\IdeaProjects\\Imgsrc_Downvote\\chromedriver.exe");
         System.setProperty("chrome.verbose", "true"); //headless  Chrome
         WebDriver driver = new ChromeDriver();
         Login login = new Login(driver);
